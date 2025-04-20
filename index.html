@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTRATION</title>
+</head>
+
+<body>
+<form id="registrationform"></form>
+    <div class="container">
+        <h1 id="form">REGISTRATION</h1>
+        <p>NAME</p>
+        <input type="text" placeholder="Enter the name" id="name"><br>
+        <p class="error" id="nameerror"></p>
+        <p>EMAIL</p>
+        <input type="text" placeholder="Enter the mail" id="email"><br>
+        <p class="error" id="emailerror"></p>
+        <p>PASSWORD</p>
+        <input type="text" placeholder="Enter the password" id="password">
+        <p class="error" id="pwderror"></p>
+        <button type="submit" id="btn" disabled>Register</button>
+    </div>
+    </form>
+
+    <style>
+        body {
+            
+            background: linear-gradient(135deg, #fceabb, #f8b500); 
+        }
+       
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 150px;
+            
+        }
+
+        .container h1 {
+            padding-left: 35px;
+
+        }
+
+        .container input {
+            width: 20%;
+            padding: 5px;
+            background-color:transparent;
+
+            border-radius: 10px;
+        }
+
+        .error {
+            color: red;
+        }
+
+        button {
+            display: block;
+            padding: 5px;
+            border-radius: 10px;
+            margin-left: 100px;
+        }
+        @media (max-width:600px){
+           .container{
+               
+            }
+        }
+    </style>
+
+    <script>
+        var nameInput = document.getElementById("name");
+        var emailInput = document.getElementById("email");
+        var passwordInput = document.getElementById("password");
+        var nameerror = document.getElementById("nameerror");
+        var emailerror = document.getElementById("emailerror");
+        var pwderror = document.getElementById("pwderror");
+        var btn = document.getElementById("btn")
+        function validateform() {
+            let isValid = true;
+            if (nameInput.value.trim() === '') {
+                nameerror.textContent = 'Name is required.';
+                isValid = false;
+            } else {
+                nameerror.textContent = '';
+            }
+
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            if (!emailPattern.test(emailInput.value.trim())) {
+                emailerror.textContent = 'Enter valid email id.';
+                isValid = false;
+            } else {
+                emailerror.textContent = '';
+            }
+
+        
+        if (passwordInput.value.length < 6) {
+            pwderror.textContent = 'Password must be at least 6 characters.';
+            isValid = false;
+        } else {
+            pwderror.textContent = '';
+
+        }
+        btn.disabled = !isValid;
+    }
+        nameInput.addEventListener('input', validateform);
+        emailInput.addEventListener('input', validateform);
+        passwordInput.addEventListener('input', validateform);
+        document.getElementById('registrationform').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Form submitted successfully!');
+        });
+    </script>
+
+</body>
+
+</html>
